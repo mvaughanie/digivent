@@ -1,5 +1,5 @@
 #To start,
-1.Type npm init to terminul
+1.Type npm install to terminul
 
 #Using the API
 2.create an .env file, add your Atlas connection URL:
