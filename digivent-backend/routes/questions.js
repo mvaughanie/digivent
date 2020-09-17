@@ -1,6 +1,6 @@
 const router = require("express").Router();
 
-const Question = require("../Question");
+const Question = require("../models/Question.js");
 const Event = require("../models/Event.js");
 
 router.get("/", (req, res, next) => {
