@@ -18,7 +18,13 @@ const routes = [
     path: "/events/:eventId?/edit",
     component: () => import("./components/edit-event/EditEvent.vue"),
     props: true,
-  },
+  }, 
+  {
+  name: "Register",
+  path: "/register",
+  // component: () => import("./components/")
+  props: true,
+  }
 ];
 
 const router = new VueRouter({
