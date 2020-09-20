@@ -1,4 +1,4 @@
-# To start,
+# To install,
 
 1. Type npm install to terminul
 
@@ -9,5 +9,7 @@
 ```
 MONGODB_URI=<YOUR_CONNECTION_URL>
 ```
+
+# To start,
 
 3. npm run start
