@@ -15,7 +15,7 @@ const routes = [
   },
   {
     name: "edit",
-    path: "/events/:eventId/edit",
+    path: "/events/:eventId?/edit",
     component: () => import("./components/edit-event/EditEvent.vue"),
     props: true,
   },
