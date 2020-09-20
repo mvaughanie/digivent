@@ -13,6 +13,12 @@ const routes = [
     component: () => import("./components/event/EventPage.vue"),
     props: true,
   },
+  {
+    name: "edit",
+    path: "/events/:eventId/edit",
+    component: () => import("./components/edit-event/EditEvent.vue"),
+    props: true,
+  },
 ];
 
 const router = new VueRouter({
