@@ -43,7 +43,7 @@
         />
       </div>
       <div>
-        <input type="submit" value="Submit" />
+        <input type="submit" :value="mode" />
       </div>
     </form>
   </div>
@@ -53,14 +53,15 @@ export default {
   name: "edit",
   data: function () {
     return {
+      mode: "Add Event",
       editing: false,
       event: {
-        name: String,
-        description: String,
-        date: String,
-        time: String,
-        address: String,
-        image: String,
+        name: null,
+        description: null,
+        date: null,
+        time: null,
+        address: null,
+        image: null,
       },
     };
   },
@@ -76,20 +77,20 @@ export default {
       ) {
         if (this.editing) {
           this.editEvent(this.event);
+        } else {
+          this.createEvent(this.event);
         }
-        // else {
-        //   this.creatEvent(this.event);
-        // }
       }
     },
 
-    // createEvent: function (event) {
-    //   this.$http
-    //     .post(`${process.env.VUE_APP_API_URL}admins/${adminId}/${event._id}`, event)
-    //     .then(function () {
-    //       this.$router.push({ path: "/events" });
-    //     });
-    // },
+    createEvent: function (event) {
+      console.log(event);
+      this.$http
+        .post(`${process.env.VUE_APP_API_URL}events`, event)
+        .then(function () {
+          this.$router.push({ path: "/events" });
+        });
+    },
 
     editEvent: function (event) {
       this.$http
@@ -103,6 +104,7 @@ export default {
     const eventId = this.$route.params.eventId;
     if (eventId) {
       this.editing = true;
+      this.mode = "Edit Event";
       this.$http
         .get(`${process.env.VUE_APP_API_URL}events/${eventId}`)
         .then(function (data) {
