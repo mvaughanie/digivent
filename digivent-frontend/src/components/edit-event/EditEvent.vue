@@ -43,7 +43,9 @@
         />
       </div>
       <div>
+
         <input type="submit" :value="mode" />
+
       </div>
     </form>
   </div>
@@ -77,6 +79,7 @@ export default {
       ) {
         if (this.editing) {
           this.editEvent(this.event);
+
         } else {
           this.createEvent(this.event);
         }
@@ -91,6 +94,7 @@ export default {
           this.$router.push({ path: "/events" });
         });
     },
+
 
     editEvent: function (event) {
       this.$http
