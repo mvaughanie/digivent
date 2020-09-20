@@ -2,7 +2,7 @@ const mongoose = require("mongoose");
 
 const UserSchema = new mongoose.Schema(
   {
-    question: String,
+    questions: [{ type: mongoose.Schema.Types.ObjectId, ref: "Question" }],
     email: {
       type: String,
       lowercase: true,
@@ -11,9 +11,10 @@ const UserSchema = new mongoose.Schema(
       match: [/\S+@\S+\.\S+/, "not a valid email address"],
       index: true,
     },
-    username: { type: String, required: true },
+    userName: { type: String, required: true },
     password: { type: String, required: true },
     image: String,
+    events: [{ type: mongoose.Schema.Types.ObjectId, ref: "Event" }],
   },
   { timestamps: true }
 );
