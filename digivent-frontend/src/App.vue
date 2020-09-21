@@ -9,13 +9,14 @@
 import MyNavbar from "./components/MyNavbar.vue";
 
 export default {
-  name: "App",
-
-  components: {
+  name: 'App',
+    components: {
     MyNavbar,
   },
 };
+
 </script>
+
 
 <style lang="scss">
 @import "@/style/_variables.scss";

@@ -18,8 +18,19 @@ const routes = [
     path: "/events/:eventId?/edit",
     component: () => import("./components/edit-event/EditEvent.vue"),
     props: true,
-  }, 
+  },
   {
+    name: "Register",
+    path: "/register",
+    // component: () => import("./components/")
+    props: true,
+  },
+  {
+    name: "login",
+    path: "/user-login",
+    component: () => import("./components/user-login/UserLogIn"),
+  },
+ {
   name: "registeruser",
   path: "/registeruser",
   component: () => import("./components/register/RegisterUser.vue"),
