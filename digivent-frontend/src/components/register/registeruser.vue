@@ -37,6 +37,8 @@
 
 <script>
 export default {
+    name: 'register-user',
+
   data: function () {
     return {
       user: {

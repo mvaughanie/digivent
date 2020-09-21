@@ -49,6 +49,7 @@
 
 <script>
 export default {
+  name: 'register-speaker',
   data: function () {
     return {
       speaker: {
