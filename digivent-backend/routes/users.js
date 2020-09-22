@@ -80,11 +80,11 @@ router.put("/:id/events", (req, res, next) => {
 });
 
 router.post("/login", (req, res, next) => {
-  if (!req.body.email) {
-    return res.status(422).send("Email can't be blank");
+  if (!req.body.userName) {
+    return res.status(422).send("username can't be blank");
   }
 
-  User.findOne({ email: req.body.email })
+  User.findOne({ userName: req.body.userName })
     .then(function (user) {
       if (!user) {
         return res.status(422).send("User not found");
@@ -105,7 +105,7 @@ router.post("/register", function (req, res, next) {
     return res.status(422).send("Email can't be blank");
   }
 
-  User.findOne({ email: req.body.email })
+  User.findOne({ userName: req.body.userName })
     .then((user) => {
       if (user) {
         return res.status(422).send("User already exists");

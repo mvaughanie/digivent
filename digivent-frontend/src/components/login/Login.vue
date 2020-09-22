@@ -8,16 +8,21 @@
           <b>Please correct the following</b>
         </p>
         <ul v-for="(error, index) in errors" v-bind:key="index">
-          <li>{{error}}</li>
+          <li>{{ error }}</li>
         </ul>
       </div>
       <div>
         <label for="username">User Name</label>
-        <input v-model="userName" type="text" name="name" id="username" />
+        <input v-model="user.userName" type="text" name="name" id="username" />
       </div>
       <div>
         <label for="pasword">Password</label>
-        <input v-model="password" type="text" name="password" id="password" />
+        <input
+          v-model="user.password"
+          type="text"
+          name="password"
+          id="password"
+        />
       </div>
       <div>
         <input type="submit" value="Log In" />
@@ -27,15 +32,15 @@
 </template>
 
 <script>
-// import EventBus from "../../eventBus.js";
+import EventBus from "../../eventBus.js";
 export default {
   data: function() {
     return {
       user: {
         userName: "",
-        password: ""
+        password: "",
       },
-      errors: []
+      errors: [],
     };
   },
   methods: {
@@ -56,7 +61,7 @@ export default {
             localStorage.loggedIn = "yes";
             localStorage.userName = user.userName;
             localStorage.userId = response.body._id;
-            // EventBus.$emit("$loggedIn");
+            EventBus.$emit("$loggedIn");
             this.$router.push({ path: "/" });
           }
         },
@@ -64,10 +69,9 @@ export default {
           this.errors.push(response.body);
         }
       );
-    }
-  }
+    },
+  },
 };
 </script>
 
-<style>
-</style>
+<style></style>
