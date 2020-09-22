@@ -43,14 +43,13 @@
         <input type="submit" value="Register" />
       </div>
     </form>
-
   </div>
 </template>
 
 <script>
 export default {
-  name: 'register-speaker',
-  data: function () {
+  name: "register-speaker",
+  data: function() {
     return {
       speaker: {
         firstName: "",
@@ -59,13 +58,13 @@ export default {
         email: "",
         password: "",
         description: "",
-        image: "",
+        image: ""
       },
-      errors: [],
+      errors: []
     };
   },
   methods: {
-    checkForm: function (event) {
+    checkForm: function(event) {
       event.preventDefault();
       this.errors = [];
       if (!this.speaker.firstName) {
@@ -90,11 +89,11 @@ export default {
         this.registerUser(this.speaker);
       }
     },
-    registerUser: function (speaker) {
+    registerUser: function(speaker) {
       this.$http
         .post(`${process.env.VUE_APP_API_URL}speakers/register`, speaker)
         .then(
-          (response) => {
+          response => {
             if (response.body) {
               localStorage.loggedIn = true;
               localStorage.speaker = speaker.email;
@@ -102,12 +101,12 @@ export default {
               this.$router.push({ path: "/" });
             }
           },
-          (response) => {
+          response => {
             this.errors.push(response.body.message);
           }
         );
-    },
-  },
+    }
+  }
 };
 </script>
 
