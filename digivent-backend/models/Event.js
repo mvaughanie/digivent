@@ -9,7 +9,7 @@ const EventSchema = new mongoose.Schema(
     address: { type: String, required: true },
     image: { type: String, required: true },
     speaker: { type: mongoose.Schema.Types.ObjectId, ref: "Speaker" },
-    guests: [{ type: mongoose.Schema.Types.ObjectId, ref: "User" }],
+    users: [{ type: mongoose.Schema.Types.ObjectId, ref: "User" }],
   },
   { timestamps: true }
 );
