@@ -18,20 +18,27 @@ const routes = [
     path: "/events/:eventId?/edit",
     component: () => import("./components/edit-event/EditEvent"),
     props: true,
-  }, 
+  },
+  {
+    name: "details",
+    path: "/events/:eventId/details",
+    component: () => import("./components/event-details/EventDetails.vue"),
+    props: true,
+  },
+
   {
     name: "profilespeaker",
     path: "/profilespeaker",
     component: () => import("./components/profile/ProfileSpeaker.vue"),
     props: true,
-    },
-    {
-      name: "profileuser",
-      path: "/profileuser",
-      component: () => import("./components/profile/ProfileUser.vue"),
-      props: true,
-      },
-      {
+  },
+  {
+    name: "profileuser",
+    path: "/profileuser",
+    component: () => import("./components/profile/ProfileUser.vue"),
+    props: true,
+  },
+  {
     name: "login",
     path: "/login",
     component: () => import("./components/login/Login"),
@@ -47,7 +54,7 @@ const routes = [
     path: "/register-speaker",
     component: () => import("./components/register/RegisterSpeaker"),
     props: true,
-    }
+  },
 ];
 
 const router = new VueRouter({

@@ -1,7 +1,9 @@
 <template>
   <div class="navbar">
-    <router-link v-bind:to="'/'">HOME</router-link>
-    <router-link v-if="loggedIn === 'yes'" v-bind:to="'/login'">Login</router-link>
+    <router-link v-bind:to="'/events'">HOME</router-link>
+    <router-link v-if="loggedIn === 'yes'" v-bind:to="'/login'"
+      >Login</router-link
+    >
     <a v-if="loggedIn === 'yes'" @click.prevent="setLoggedOut" href>Log Out</a>
     <router-link :to="'/events'">QUESTION</router-link>
     <router-link :to="'/events'">MY EVENTS</router-link>
@@ -12,11 +14,11 @@
 <script>
 import EventBus from "../eventBus";
 export default {
-  name: "navbar",
+  name: "MyNavbar",
   data: function() {
     return {
       loggedIn: "no",
-      userName: ""
+      userName: "",
     };
   },
   methods: {
@@ -35,18 +37,18 @@ export default {
       localStorage.removeItem("userId");
       this.loggedIn = localStorage.loggedIn;
       this.userName = localStorage.userName;
-    }
+    },
   },
   mounted() {
     this.loggedIn = localStorage.getItem("loggedIn");
     this.userName = localStorage.getItem("userName");
     EventBus.$on("$loggedIn", this.setLoggedIn);
-  }
+  },
 };
 </script>
 
 <style>
-.nav {
+.navbar {
   width: 100%;
   display: flex;
   justify-content: space-around;

@@ -1,8 +1,12 @@
 <template>
   <div>
     <div class="top">
-    <h1>Speaker Profile</h1>
-    <img src="https://drive.google.com/file/d/1tnG6HWvv7d7Pi22-0g9HapTmyb2TtlwW/view?usp=sharing" width="250px" height="250px">
+      <h1>Speaker Profile</h1>
+      <img
+        src="https://drive.google.com/file/d/1tnG6HWvv7d7Pi22-0g9HapTmyb2TtlwW/view?usp=sharing"
+        width="250px"
+        height="250px"
+      />
     </div>
     <div class="info">
       <div class="row">
@@ -10,21 +14,20 @@
         <p>Jimmy</p>
       </div>
       <div class="row">
-        <p>Last name: </p>
+        <p>Last name:</p>
         <p></p>
       </div>
       <div class="row">
-        <p>Username: </p>
+        <p>Username:</p>
       </div>
       <div class="row">
-        <p>Email: </p>
+        <p>Email:</p>
       </div>
       <div class="row">
         <p>Description:</p>
       </div>
     </div>
     <a v-if="loggedIn === 'yes'" @click.prevent="setLoggedOut" href>Log Out</a>
-
   </div>
 </template>
 
@@ -33,10 +36,10 @@ export default {};
 </script>
 
 <style lang="scss" scoped>
-@import "@../style/_variables.scss";
+@import "@/style/_variables.scss";
 
 h1 {
-   @include heading-large;
+  @include heading-large;
 }
 
 .info {
@@ -45,7 +48,7 @@ h1 {
   flex-direction: column;
   justify-content: center;
   margin: 1rem 0;
-  align-items:center;
+  align-items: center;
 }
 .row {
   display: flex;

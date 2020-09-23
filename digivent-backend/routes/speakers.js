@@ -52,8 +52,6 @@ router.delete("/:id", (req, res, next) => {
   });
 });
 
-
-
 router.get("/:id/events", (req, res, next) => {
   Event.find({ speaker: req.speaker.id })
     .sort({ createdAt: "desc" })
@@ -63,9 +61,7 @@ router.get("/:id/events", (req, res, next) => {
     .catch(next);
 });
 
-
 router.post("/:id/events", (req, res, next) => {
-
   const event = new Event(req.body);
   event.speaker = req.speaker.id;
   event
@@ -89,7 +85,6 @@ router.post("/login", (req, res, next) => {
   if (!req.body.email) {
     return res.status(422).send("Email can't be blank");
   }
-
 
   Speaker.findOne({ email: req.body.email })
     .then(function (speaker) {
