@@ -31,8 +31,6 @@ export default {
     setLoggedIn: function() {
       console.log("login");
       localStorage.loggedIn = "yes";
-      // localStorage.removeItem("userName");
-      // localStorage.removeItem("userId");
       this.loggedIn = localStorage.loggedIn;
       this.userName = localStorage.userName;
     }
