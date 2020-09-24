@@ -18,7 +18,7 @@ const routes = [
     path: "/events/:eventId?/edit",
     component: () => import("./components/edit-event/EditEvent"),
     props: true,
-  },
+  }, 
   {
     name: "details",
     path: "/events/:eventId/details",
@@ -32,13 +32,13 @@ const routes = [
     component: () => import("./components/profile/ProfileSpeaker.vue"),
     props: true,
   },
-  {
-    name: "profileuser",
-    path: "/profileuser",
-    component: () => import("./components/profile/ProfileUser.vue"),
-    props: true,
-  },
-  {
+    {
+      name: "profileuser",
+      path: "/profileuser",
+      component: () => import("./components/profile/ProfileUser.vue"),
+      props: true,
+      },
+      {
     name: "login",
     path: "/login",
     component: () => import("./components/login/Login"),
