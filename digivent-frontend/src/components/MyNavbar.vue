@@ -1,8 +1,8 @@
 <template>
   <div class="navbar">
     <router-link v-bind:to="'/'">HOME</router-link>
-    <!-- <router-link v-if="loggedIn === 'yes'" v-bind:to="'/login'">Login</router-link>
-    <a v-if="loggedIn === 'yes'" @click.prevent="setLoggedOut" href>Log Out</a>-->
+    <router-link v-if="loggedIn === 'yes'" v-bind:to="'/login'">Login</router-link>
+    <a v-if="loggedIn === 'yes'" @click.prevent="setLoggedOut" href>Log Out</a>
     <router-link :to="'/events'">QUESTION</router-link>
     <router-link :to="'/events'">MY EVENTS</router-link>
     <router-link :to="'/events'">PROFILE</router-link>
@@ -24,6 +24,8 @@ export default {
       localStorage.loggedIn = "no";
       localStorage.removeItem("userName");
       localStorage.removeItem("userId");
+      localStorage.removeItem("speakerName");
+      localStorage.removeItem("speakerId");
       EventBus.$emit("$loggedIn");
       // redirect to login page
       this.$router.push({ path: "/login" });

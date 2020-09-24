@@ -6,7 +6,7 @@
       <h2>SPEAKER</h2>
     </div>
 
-    <form class="user" v-on:submit.prevent="checkForm">
+    <form class="user" v-on:submit.prevent="checkUser">
       <div v-if="errors.length">
         <p>
           <b>Please correct the following</b>
@@ -34,7 +34,7 @@
         <input type="submit" value="Log In" />
       </div>
     </form>
-    <form class="speaker" v-on:submit.prevent="checkForm">
+    <form class="speaker" v-on:submit.prevent="checkSpeaker">
       <div v-if="errors.length">
         <p>
           <b>Please correct the following</b>
@@ -82,7 +82,7 @@ export default {
     };
   },
   methods: {
-    checkForm: function(event) {
+    checkUser: function(event) {
       console.log("user");
       event.preventDefault();
       this.errors = [];
@@ -91,6 +91,17 @@ export default {
       }
       if (!this.errors.length) {
         this.loginUser(this.user);
+      }
+    },
+    checkSpeaker: function(event) {
+      console.log("speaker");
+      event.preventDefault();
+      this.errors = [];
+      if (!this.speaker.userName) {
+        this.errors.push("Username required");
+      }
+      if (!this.errors.length) {
+        this.loginSpeaker(this.speaker);
       }
     },
     loginUser(user) {
@@ -112,12 +123,12 @@ export default {
 
     loginSpeaker(speaker) {
       this.$http
-        .post(`${process.env.VUE_APP_API_URL}speaker/login`, speaker)
+        .post(`${process.env.VUE_APP_API_URL}speakers/login`, speaker)
         .then(
           function(response) {
-            if (response.body.speakerName) {
+            if (response.body.userName) {
               localStorage.loggedIn = "yes";
-              localStorage.speakerName = speaker.speakerName;
+              localStorage.speakerName = speaker.userName;
               localStorage.speakerId = response.body._id;
               EventBus.$emit("$loggedIn");
               this.$router.push({ path: "/" });
