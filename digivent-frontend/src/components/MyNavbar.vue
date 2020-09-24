@@ -27,6 +27,8 @@ export default {
       localStorage.loggedIn = "no";
       localStorage.removeItem("userName");
       localStorage.removeItem("userId");
+      localStorage.removeItem("speakerName");
+      localStorage.removeItem("speakerId");
       EventBus.$emit("$loggedIn");
       // redirect to login page
       this.$router.push({ path: "/login" });
@@ -34,8 +36,6 @@ export default {
     setLoggedIn: function() {
       console.log("login");
       localStorage.loggedIn = "yes";
-      localStorage.removeItem("userName");
-      localStorage.removeItem("userId");
       this.loggedIn = localStorage.loggedIn;
       this.userName = localStorage.userName;
     },

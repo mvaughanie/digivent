@@ -82,11 +82,13 @@ router.post("/:id/events", (req, res, next) => {
 });
 
 router.post("/login", (req, res, next) => {
-  if (!req.body.email) {
-    return res.status(422).send("Email can't be blank");
+  if (!req.body.userName) {
+    return res.status(422).send("username can't be blank");
   }
 
-  Speaker.findOne({ email: req.body.email })
+
+  Speaker.findOne({ userName: req.body.userName })
+
     .then(function (speaker) {
       if (!speaker) {
         return res.status(422).send("speaker not found");
