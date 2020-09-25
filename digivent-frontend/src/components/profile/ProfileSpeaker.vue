@@ -9,9 +9,9 @@
       />
     </div>
     <div class="info">
-      <div class="row">
+      <!-- <div class="row">
         <p>First name:</p>
-        <p>Jimmy</p>
+        <p>{{speaker.firstName}}</p>
       </div>
       <div class="row">
         <p>Last name:</p>
@@ -25,14 +25,31 @@
       </div>
       <div class="row">
         <p>Description:</p>
-      </div>
+        <p>{{speaker.description}}</p>
+      </div>-->
     </div>
     <a v-if="loggedIn === 'yes'" @click.prevent="setLoggedOut" href>Log Out</a>
   </div>
 </template>
 
 <script>
-export default {};
+// export default {
+//   name: "SpeakerProfile",
+
+//   data: function() {
+//     return {
+//       event: {},
+//     };
+//   },
+//   created: function() {
+//     const id = this.$route.params.speakerId;
+//     this.$http
+//       .get(`${process.env.VUE_APP_API_URL}speaker/${id}`)
+//       .then(function(data) {
+//         this.speaker = data.body;
+//       });
+//   }
+// }
 </script>
 
 <style lang="scss" scoped>

@@ -87,6 +87,7 @@ router.post("/login", (req, res, next) => {
   }
 
   Speaker.findOne({ userName: req.body.userName })
+
     .then(function (speaker) {
       if (!speaker) {
         return res.status(422).send("speaker not found");
