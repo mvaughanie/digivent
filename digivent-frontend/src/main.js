@@ -27,17 +27,11 @@ const routes = [
   },
 
   {
-    name: "profilespeaker",
-    path: "/profilespeaker",
-    component: () => import("./components/profile/ProfileSpeaker.vue"),
+    name: "profile",
+    path: "/profile",
+    component: () => import("./components/profile/Profile.vue"),
     props: true,
   },
-    {
-      name: "profileuser",
-      path: "/profileuser",
-      component: () => import("./components/profile/ProfileUser.vue"),
-      props: true,
-      },
       {
     name: "login",
     path: "/login",
