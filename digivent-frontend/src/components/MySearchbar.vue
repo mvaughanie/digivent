@@ -1,27 +1,24 @@
 <template>
   <div>
-    <!-- <form>
-      <input v-model="search" @change="searchEvent" type="text" id="search" />
-      <router-link :to="{ name: 'edit' }">New event</router-link>
-    </form>-->
+    <form>
+      <label for="search">Search Event</label>
+      <input @input="searchEvent" :search="search" type="text" id="search" />
+    </form>
   </div>
 </template>
 
 <script>
-// import eventBus from "../eventBus";
 
 export default {
   name: "MySearchbar",
-  // data() {
-  //   return {
-  //     search: null,
-  //   };
-  // },
-  // methods: {
-  //   searchEvent() {
-  //     eventBus.$emit("$filterEvent", this.search);
-  //   },
-  // },
+  props: {
+      search: null,
+  },
+  methods: {
+    searchEvent($event) {
+      this.$emit('input', $event.target.value)
+    },
+  },
 };
 </script>
 

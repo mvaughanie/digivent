@@ -28,7 +28,12 @@
       </div>
       <div>
         <label for="pasword">Password</label>
-        <input v-model="user.password" type="text" name="password" id="password" />
+        <input
+          v-model="user.password"
+          type="text"
+          name="password"
+          id="password"
+        />
       </div>
       <div>
         <input type="submit" value="Log In" />
@@ -52,11 +57,21 @@
       </div>
       <div>
         <label for="username">User Name</label>
-        <input v-model="speaker.userName" type="text" name="name" id="username" />
+        <input
+          v-model="speaker.userName"
+          type="text"
+          name="name"
+          id="username"
+        />
       </div>
       <div>
         <label for="pasword">Password</label>
-        <input v-model="speaker.password" type="text" name="password" id="password" />
+        <input
+          v-model="speaker.password"
+          type="text"
+          name="password"
+          id="password"
+        />
       </div>
       <div>
         <input type="submit" value="Log In" />
@@ -68,17 +83,19 @@
 <script>
 import EventBus from "../../eventBus.js";
 export default {
+  name: "login",
+
   data: function() {
     return {
       user: {
         userName: "",
-        password: ""
+        password: "",
       },
       speaker: {
         userName: "",
-        password: ""
+        password: "",
       },
-      errors: []
+      errors: [],
     };
   },
   methods: {
@@ -112,7 +129,7 @@ export default {
             localStorage.userName = user.userName;
             localStorage.userId = response.body._id;
             EventBus.$emit("$loggedIn");
-            this.$router.push({ path: "/" });
+            this.$router.push({ path: "/events" });
           }
         },
         function(response) {
@@ -138,8 +155,8 @@ export default {
             this.errors.push(response.body);
           }
         );
-    }
-  }
+    },
+  },
 };
 </script>
 

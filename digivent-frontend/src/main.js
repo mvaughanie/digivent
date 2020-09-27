@@ -10,7 +10,7 @@ const routes = [
   {
     name: "event",
     path: "/events",
-    component: () => import("./components/event/EventPage"),
+    component: () => import("./components/event/Event"),
     props: true,
   },
   {
@@ -18,21 +18,30 @@ const routes = [
     path: "/events/:eventId?/edit",
     component: () => import("./components/edit-event/EditEvent"),
     props: true,
-  }, 
+  },
   {
     name: "details",
     path: "/events/:eventId/details",
-    component: () => import("./components/event-details/EventDetails.vue"),
+    component: () => import("./components/event-details/EventDetails"),
+    props: true,
+    beforeEnter: (to, from, next) => {
+      if (!localStorage.getItem("userName")) return next("login");
+      next();
+    },
+  },
+  {
+    name: "book",
+    path: "/booking",
+    component: () => import("./components/book/BookEvent"),
     props: true,
   },
-
   {
     name: "profile",
     path: "/profile",
-    component: () => import("./components/profile/Profile.vue"),
+    component: () => import("./components/profile/Profile"),
     props: true,
   },
-      {
+  {
     name: "login",
     path: "/login",
     component: () => import("./components/login/Login"),

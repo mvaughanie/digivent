@@ -1,6 +1,7 @@
 const router = require("express").Router();
 const Event = require("../models/Event");
 const Speaker = require("../models/Speaker.js");
+const { populate } = require("../models/Event");
 
 router.param("id", (req, res, next, id) => {
   Event.findById(id)
@@ -15,39 +16,52 @@ router.param("id", (req, res, next, id) => {
     .catch(next);
 });
 
+// Get events with speaker's name"
 router.get("/", (req, res, next) => {
   Event.find({})
+    .populate("speaker", "firstName lastName")
     .sort({ createdAt: "desc" })
+    .exec()
     .then((results) => {
+      console.log("Get event with speaker's name");
       return res.send(results);
     })
     .catch(next);
 });
 
+// Get event by Id with speaker's name and image
 router.get("/:id", (req, res, next) => {
-  return res.status(200).send(req.event);
+  Event.findById(req.event.id)
+    .populate("speaker", "firstName lastName image")
+    .then((event) => {
+      return res.send(event);
+    })
+    .catch(next);
 });
 
+// Get speaker's detail by event Id
 router.get("/:id/speaker", (req, res, next) => {
   Speaker.find({ _id: req.event.speaker })
     .sort({ createdAt: "desc" })
     .then((speaker) => {
-      return res.status(200).send(speaker[0]);
+      console.log("Get speaker data by eventId");
+      return res.status(200).send(speaker);
     })
     .catch(next);
 });
 
 // Post new event
-// router.post("/", (req, res, next) => {
-//   const event = new Event(req.body);
-//   event
-//     .save()
-//     .then((result) => {
-//       return res.status(201).send(result);
-//     })
-//     .catch(next);
-// });
+router.post("/", (req, res, next) => {
+  const event = new Event(req.body);
+  event
+    .save()
+    .then((result) => {
+      return res.status(201).send(result);
+    })
+    .catch(next);
+});
 
+// Edit event
 router.put("/:id", (req, res, next) => {
   Event.findByIdAndUpdate(req.event.id, req.body)
     .then((event) => {
@@ -56,6 +70,7 @@ router.put("/:id", (req, res, next) => {
     .catch(next);
 });
 
+// Delete event
 router.delete("/:id", (req, res, next) => {
   Event.findByIdAndDelete(req.event.id)
     .then((event) => {

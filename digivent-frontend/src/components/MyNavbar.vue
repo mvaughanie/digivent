@@ -1,14 +1,17 @@
 <template>
   <div class="navbar">
-    <img src="../../public/logo.png" alt="">
-    <router-link class="text"  v-bind:to="'/'">Home</router-link>
-    
-    <router-link  class="text" :to="'/events'">Questions</router-link>
-    <router-link class="text" :to="'/events'">My Events</router-link>
-    <router-link class="text" :to="'/profile'">Profile</router-link>
-    <router-link class="text"  v-if="loggedIn === 'no'" v-bind:to="'/login'">Login</router-link>
-    <a class="text"  v-if="loggedIn === 'yes'" @click.prevent="setLoggedOut" href>Log Out</a>
+    <img src="@/assets/logo-icon.svg/" class="logo" alt="logo" />
 
+    <router-link class="text" v-bind:to="'/events'">Home</router-link>
+    <router-link class="text" :to="'/'">Questions</router-link>
+    <router-link class="text" :to="'/my-events'">My Events</router-link>
+    <router-link class="text" :to="'/profile'">Profile</router-link>
+    <router-link class="text" v-if="loggedIn === 'no'" v-bind:to="'/login'"
+      >Login</router-link
+    >
+    <a class="text" v-if="loggedIn === 'yes'" @click.prevent="setLoggedOut" href
+      >Log Out</a
+    >
   </div>
 </template>
 
@@ -48,28 +51,25 @@ export default {
 };
 </script>
 
-<style>
-/* @import "@/style/_variables.scss"; */
+<style lang="scss">
+@import "@/style/_variables.scss";
 .navbar {
   width: 100%;
   display: flex;
   justify-content: space-around;
-  background-color: #05386b;
+  background-color: $primary;
+  a {
+    color: $natural-light;
+  }
+}
+.router-link-active {
+  color: red;
+}
+.text {
   color: white;
-  font-family: "Roboto", sans-serif;
-  font-style: normal;
-  font-weight: 500;
-  font-size: 20px;
-}
-.router-link-exact-active {
-    color: rgb(85, 85, 85)!important;
-}
-.text{
-    color: white;
 }
 
-img {
+.logo {
   width: 50px;
-  height: 50px;
 }
 </style>
