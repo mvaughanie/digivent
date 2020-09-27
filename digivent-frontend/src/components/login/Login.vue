@@ -49,18 +49,8 @@
       </div>
 
       <div>
-<<<<<<< HEAD
-        <label for="username">User Name</label>
-        <input
-          v-model="speaker.userName"
-          type="text"
-          name="name"
-          id="username"
-        />
-=======
         <label for="username"> Speaker Name</label>
         <input v-model="speaker.userName" type="text" name="name" id="username" />
->>>>>>> a8a2c598462961c4ee1e3bbf02870212c2abdc04
       </div>
       <div>
         <label for="pasword">Password</label>
