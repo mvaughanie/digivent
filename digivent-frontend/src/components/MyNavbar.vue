@@ -22,32 +22,30 @@ export default {
   data: function() {
     return {
       loggedIn: "no",
-      userName: "",
+      userName: ""
     };
   },
   methods: {
     setLoggedOut: function() {
+      console.log("logout")
       localStorage.loggedIn = "no";
       localStorage.removeItem("userName");
       localStorage.removeItem("userId");
-      localStorage.removeItem("speakerName");
       localStorage.removeItem("speakerId");
       EventBus.$emit("$loggedIn");
-      // redirect to login page
-      this.$router.push({ path: "/login" });
+      this.$router.push({ path: "/" });
     },
     setLoggedIn: function() {
       console.log("login");
-      localStorage.loggedIn = "yes";
       this.loggedIn = localStorage.loggedIn;
       this.userName = localStorage.userName;
-    },
+    }
   },
   mounted() {
     this.loggedIn = localStorage.getItem("loggedIn");
     this.userName = localStorage.getItem("userName");
     EventBus.$on("$loggedIn", this.setLoggedIn);
-  },
+  }
 };
 </script>
 
