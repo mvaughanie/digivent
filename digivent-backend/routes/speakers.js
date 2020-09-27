@@ -86,7 +86,6 @@ router.post("/login", (req, res, next) => {
     return res.status(422).send("username can't be blank");
   }
 
-
   Speaker.findOne({ userName: req.body.userName })
 
     .then(function (speaker) {
