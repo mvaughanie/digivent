@@ -1,7 +1,6 @@
 const router = require("express").Router();
 const Event = require("../models/Event");
 const Speaker = require("../models/Speaker.js");
-const { populate } = require("../models/Event");
 
 router.param("id", (req, res, next, id) => {
   Event.findById(id)

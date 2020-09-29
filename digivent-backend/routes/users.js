@@ -1,6 +1,7 @@
 const router = require("express").Router();
 const User = require("../models/User.js");
-const Event = require("../models/Event.js");
+const Question = require("../models/Question.js");
+const Speaker = require("../models/Speaker.js");
 
 router.param("id", (req, res, next, id) => {
   User.findById(id)
@@ -55,7 +56,6 @@ router.delete("/:id", (req, res, next) => {
 // Get events details by userId
 router.get("/:id/events", (req, res, next) => {
   User.findById(req.user.id)
-    // .select("events")
     .populate("events", "name date")
     .then((events) => {
       return res.send(events);
@@ -67,7 +67,7 @@ router.get("/:id/events", (req, res, next) => {
 router.put("/:id/event", (req, res, next) => {
   User.findByIdAndUpdate(req.user.id, { $addToSet: { events: req.body } })
     .then((user) => {
-      console.log("put eventId in user array");
+      console.log("Add eventId to the user array");
       return res.status(201).send(user);
     })
     .catch(next);
@@ -84,6 +84,28 @@ router.post("/login", (req, res, next) => {
         return res.status(422).send("User not found");
       }
       return res.send(user);
+    })
+    .catch(next);
+});
+
+// Post new question by userId
+router.post("/:id/question", (req, res, next) => {
+  const question = new Question(req.body);
+  question.user = req.user.id;
+  question
+    .save()
+    .then((question) => {
+      if (!req.user.questions) {
+        req.user.questions = [];
+      }
+      console.log(question);
+      req.user.questions.push(question);
+      req.user
+        .save()
+        .then((user) => {
+          res.status(201).send({ question: question, user: user });
+        })
+        .catch(next);
     })
     .catch(next);
 });

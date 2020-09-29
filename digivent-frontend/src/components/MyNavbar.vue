@@ -6,11 +6,10 @@
     <router-link class="text" :to="'/'">Questions</router-link>
     <router-link class="text" :to="'/my-events'">My Events</router-link>
     <router-link class="text" :to="'/profile'">Profile</router-link>
-    <router-link class="text" v-if="loggedIn === 'no'" v-bind:to="'/login'"
+        <a class="text" v-if="loggedIn === 'yes'" @click.prevent="setLoggedOut" href>Log Out</a>
+
+    <router-link class="text" v-else v-bind:to="'/login'"
       >Login</router-link
-    >
-    <a class="text" v-if="loggedIn === 'yes'" @click.prevent="setLoggedOut" href
-      >Log Out</a
     >
   </div>
 </template>
@@ -22,12 +21,12 @@ export default {
   data: function() {
     return {
       loggedIn: "no",
-      userName: ""
+      userName: "",
     };
   },
   methods: {
     setLoggedOut: function() {
-      console.log("logout")
+      console.log("logout");
       localStorage.loggedIn = "no";
       localStorage.removeItem("userName");
       localStorage.removeItem("userId");
@@ -39,13 +38,13 @@ export default {
       console.log("login");
       this.loggedIn = localStorage.loggedIn;
       this.userName = localStorage.userName;
-    }
+    },
   },
   mounted() {
     this.loggedIn = localStorage.getItem("loggedIn");
     this.userName = localStorage.getItem("userName");
     EventBus.$on("$loggedIn", this.setLoggedIn);
-  }
+  },
 };
 </script>
 

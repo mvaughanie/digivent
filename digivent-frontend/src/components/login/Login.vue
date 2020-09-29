@@ -4,12 +4,10 @@
     <div class="login">
       <div class="formButton">
         <button @click="show = true">User</button>
-      
-      
-      <button @click="show = false">Speaker</button>
-  </div>
+
+        <button @click="show = false">Speaker</button>
+      </div>
     </div>
-  
 
     <form v-if="show" class="user" v-on:submit.prevent="checkUser">
       <div v-if="errors.length">
@@ -50,7 +48,12 @@
 
       <div>
         <label for="username"> Speaker Name</label>
-        <input v-model="speaker.userName" type="text" name="name" id="username" />
+        <input
+          v-model="speaker.userName"
+          type="text"
+          name="name"
+          id="username"
+        />
       </div>
       <div>
         <label for="pasword">Password</label>
@@ -65,8 +68,6 @@
         <input type="submit" value="Log In" />
       </div>
     </form>
-
-
   </div>
 </template>
 
@@ -90,7 +91,6 @@ export default {
     };
   },
   methods: {
-
     checkUser: function(event) {
       console.log("user");
       event.preventDefault();
@@ -154,7 +154,4 @@ export default {
 
 <style lang="scss" scoped>
 @import "@/style/_variables.scss";
-
-
-
 </style>

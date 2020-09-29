@@ -33,8 +33,8 @@
       </div>
     </div>
 
-    <div v-if="isSpeaker === 'yes'" class="flexbox">
-      <router-link :to="{ name: 'edit', params: { eventId: event._id } }">
+    <div v-if="isSpeaker === 'yes'">
+      <router-link :to="{ name: 'edit', params: { eventId: event._id } }" @click="checkSpeaker">
         Edit event
       </router-link>
       <a href @click.prevent="deleteEvent(event._id)"> Delete Event </a>
@@ -49,12 +49,13 @@
       </div>
       <h4>Event description</h4>
       <p>{{ event.description }}</p>
-      <router-link
-        @click.prevent="bookEvent(event._id)"
-        class="btn"
-        :to="{ name: 'book', params: { event: event } }"
-        >Book
-      </router-link>
+      <div @click.prevent="bookEvent()">
+        <router-link
+          class="btn"
+          :to="{ name: 'book', params: { event: event } }"
+          >Book
+        </router-link>
+      </div>
     </div>
   </div>
 </template>
@@ -98,9 +99,14 @@ export default {
           this.$router.push({ path: "/events" });
         });
     },
-    bookEvent: function(eventId) {
-      alert("book");
-      console.log(eventId);
+    bookEvent: function() {
+      const event = this.event;
+      const id = localStorage.userId;
+      this.$http
+        .put(`${process.env.VUE_APP_API_URL}users/${id}/event`, event)
+        .then(function() {
+          alert("Booking confirmed!");
+        });
     },
   },
 };
@@ -108,6 +114,7 @@ export default {
 
 <style lang="scss">
 @import "@/style/_variables.scss";
+
 .flexbox {
   display: flex;
   align-items: center;

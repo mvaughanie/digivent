@@ -2,7 +2,7 @@
   <div>
     <MySearchbar v-model="search" type="text" id="search" />
 
-    <div v-if="isSpeaker === 'yes'" class="flexbox">
+    <div v-if="isSpeaker === 'yes'">
       <h3>Hi Host, {{ speaker.firstName }} {{ speaker.lastName }}</h3>
       <h4>Check <a href="">your events</a></h4>
       <div class="flexbox__thumb">
@@ -71,20 +71,16 @@ export default {
 };
 </script>
 
-<style>
-.contents {
+<style lang="scss">
+@import "@/style/_variables.scss";
+
+.flexbox {
   display: flex;
-}
-.contents__box {
-  margin: 20px;
-}
-.contents__img {
-  height: 400px;
-  width: 300px;
+  align-items: center;
   overflow: hidden;
-}
-img {
-  height: 100%;
-  width: auto;
-}
+
+  &__thumb {
+    @include thumb-img;
+  }
+}  
 </style>

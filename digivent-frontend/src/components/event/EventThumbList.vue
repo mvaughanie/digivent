@@ -22,14 +22,28 @@
 <script>
 export default {
   name: "EventThumbList",
-  props: ["events"],
+  props: ["events"]
 };
 </script>
 
-<style>
+<style lang="scss">
+@import "@/style/_variables.scss";
 .contents {
+  display: flex;
   white-space: nowrap;
   overflow-x: auto;
   overflow-y: hidden;
+  &__box {
+  margin: 20px;
+  }
+  &__img {
+  height: 400px;
+  width: 300px;
+  overflow: hidden;
+    img {
+    height: 100%;
+    width: auto;
+    }
+  }
 }
 </style>
