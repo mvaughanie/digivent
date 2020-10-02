@@ -11,7 +11,7 @@
 
     <h3>{{ question.event.name }}</h3>
     <router-link
-      :to="{ name: 'Question', params: { eventId: question.event._id } }"
+      :to="{ name: 'question', params: { eventId: question.event._id } }"
       >View Questions
     </router-link>
     <p>User name</p>
@@ -36,7 +36,7 @@
 </template>
 <script>
 export default {
-  name: "PostQuestion",
+  name: "post-question",
 
   data: function() {
     return {
@@ -70,7 +70,7 @@ export default {
         )
         .then(function() {
           this.$router.push({
-            name: "Question",
+            name: "question",
             params: { eventId: this.question.event._id },
           });
         });

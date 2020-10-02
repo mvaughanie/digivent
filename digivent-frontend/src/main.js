@@ -20,9 +20,9 @@ const routes = [
     props: true,
   },
   {
-    name: "details",
-    path: "/:eventId/details",
-    component: () => import("./components/event-details/EventDetails"),
+    name: "detail",
+    path: "/:eventId/detail",
+    component: () => import("./components/event-detail/EventDetail"),
     props: true,
     beforeEnter: (to, from, next) => {
       if (!localStorage.getItem("userName")) return next("login");
@@ -63,26 +63,26 @@ const routes = [
     props: true,
   },
   {
-    name: "PostQuestion",
+    name: "post-question",
     path: "/post-question",
     component: () => import("./components/post-question/PostQuestion"),
     props: true,
   },
   {
-    name: "Question",
+    name: "question",
     path: "/question",
     component: () => import("./components/question/Question"),
     props: true,
   },
   {
-    name: "MyQuestions",
+    name: "my-questions",
     path: "/my-questions",
     component: () => import("./components/question/MyQuestions"),
   },
-    {
-    name:"speaker-detail",
-    path:"/speaker-detail",
-    component:() => import("./components/speaker-detail/SpeakerDetail.vue"),
+  {
+    name: "speaker-detail",
+    path: "/speaker-detail",
+    component: () => import("./components/speaker-detail/SpeakerDetail.vue"),
     props: true,
   },
 ];

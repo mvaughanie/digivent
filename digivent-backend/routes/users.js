@@ -1,7 +1,6 @@
 const router = require("express").Router();
 const User = require("../models/User.js");
 const Question = require("../models/Question.js");
-const Speaker = require("../models/Speaker.js");
 
 router.param("id", (req, res, next, id) => {
   User.findById(id)

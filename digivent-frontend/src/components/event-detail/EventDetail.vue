@@ -51,7 +51,7 @@
         >
           <h6>About host</h6>
         </router-link>
-        <router-link :to="{ name: 'Question', params: { eventId: event._id } }"
+        <router-link :to="{ name: 'question', params: { eventId: event._id } }"
           >View Questions
         </router-link>
       </div>
@@ -70,7 +70,7 @@
 
 <script>
 export default {
-  name: "EventDetails",
+  name: "detail",
   data: function() {
     return {
       event: {
@@ -130,6 +130,7 @@ export default {
           params: { eventId: this.event._id },
         });
       }
+    },
   },
 };
 </script>

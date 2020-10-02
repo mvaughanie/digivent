@@ -1,6 +1,6 @@
 <template>
   <div>
-    <MySearchbar v-model="search" type="text" id="search" />
+    <Searchbar v-model="search" type="text" id="search" />
 
     <div v-if="isSpeaker === 'yes'">
       <h3>Hi Host, {{ speaker.firstName }} {{ speaker.lastName }}</h3>
@@ -20,13 +20,13 @@
 
 <script>
 import EventThumbList from "./EventThumbList";
-import MySearchbar from "../MySearchbar";
+import Searchbar from "../Searchbar";
 
 export default {
   name: "event",
   components: {
     EventThumbList,
-    MySearchbar,
+    Searchbar,
   },
   data: function() {
     return {

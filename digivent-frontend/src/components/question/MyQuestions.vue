@@ -13,7 +13,7 @@
         </div>
       </div>
       <!-- <router-link
-        :to="{ name: 'PostQuestion', params: { eventId: event._id } }"
+        :to="{ name: 'post-question', params: { eventId: event._id } }"
         >Ask question
       </router-link> -->
     </div>
@@ -26,7 +26,7 @@
 
 <script>
 export default {
-  name: "MyQuestions",
+  name: "my-questions",
   data: function() {
     return {
       isEmpty: "no",

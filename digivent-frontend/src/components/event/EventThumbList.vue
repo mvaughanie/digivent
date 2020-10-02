@@ -4,7 +4,7 @@
       <div class="contents__box" v-for="(event, i) in events" :key="i">
         <router-link
           v-bind:to="{
-            name: 'details',
+            name: 'detail',
             params: { eventId: event._id },
           }"
         >
@@ -22,7 +22,7 @@
 <script>
 export default {
   name: "EventThumbList",
-  props: ["events"]
+  props: ["events"],
 };
 </script>
 

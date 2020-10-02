@@ -8,15 +8,14 @@
 </template>
 
 <script>
-
 export default {
-  name: "MySearchbar",
+  name: "Searchbar",
   props: {
-      search: null,
+    search: null,
   },
   methods: {
     searchEvent($event) {
-      this.$emit('input', $event.target.value)
+      this.$emit("input", $event.target.value);
     },
   },
 };

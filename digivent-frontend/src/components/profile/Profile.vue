@@ -52,7 +52,7 @@
 
 <script>
 export default {
-  name: "Profile",
+  name: "profile",
 
   data: function() {
     return {

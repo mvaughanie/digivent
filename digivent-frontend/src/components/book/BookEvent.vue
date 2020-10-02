@@ -15,8 +15,10 @@
       <img src="@/assets/time.svg" alt="time" />
       <h4>{{ event.time }}</h4>
     </div>
-    <div>Qr code</div>
-    <router-link :to="{ name: 'PostQuestion', params: { eventId: event._id } }"
+    <div>
+      <img src="@/assets/qr-code.svg" alt="" />
+    </div>
+    <router-link :to="{ name: 'post-question', params: { eventId: event._id } }"
       >Ask question
     </router-link>
   </div>
