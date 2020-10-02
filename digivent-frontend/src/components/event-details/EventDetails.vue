@@ -34,7 +34,10 @@
     </div>
 
     <div v-if="isSpeaker === 'yes'">
-      <router-link :to="{ name: 'edit', params: { eventId: event._id } }" @click="checkSpeaker">
+      <router-link
+        :to="{ name: 'edit', params: { eventId: event._id } }"
+        @click="checkSpeaker"
+      >
         Edit event
       </router-link>
       <a href @click.prevent="deleteEvent(event._id)"> Delete Event </a>
@@ -44,7 +47,11 @@
 
     <div v-else>
       <div class="flexbox">
-        <h6>About host</h6>
+        <router-link
+          :to="{ name: 'speaker-detail', params: { speakerId: event.speaker } }"
+        >
+          <h6>About host</h6>
+        </router-link>
         <input type="button" value="Ask question" />
       </div>
       <h4>Event description</h4>
@@ -63,7 +70,6 @@
 <script>
 export default {
   name: "EventDetails",
-
   data: function() {
     return {
       event: {

@@ -6,18 +6,18 @@
     <router-link class="text" :to="'/'">Questions</router-link>
     <router-link class="text" :to="'/my-events'">My Events</router-link>
     <router-link class="text" :to="'/profile'">Profile</router-link>
-        <a class="text" v-if="loggedIn === 'yes'" @click.prevent="setLoggedOut" href>Log Out</a>
-
-    <router-link class="text" v-else v-bind:to="'/login'"
-      >Login</router-link
+    <a class="text" v-if="loggedIn === 'yes'" @click.prevent="setLoggedOut" href
+      >Log Out</a
     >
+
+    <router-link class="text" v-else v-bind:to="'/login'">Login</router-link>
   </div>
 </template>
 
 <script>
 import EventBus from "../eventBus";
 export default {
-  name: "MyNavbar",
+  name: "navbar",
   data: function() {
     return {
       loggedIn: "no",
@@ -50,6 +50,7 @@ export default {
 
 <style lang="scss">
 @import "@/style/_variables.scss";
+
 .navbar {
   width: 100%;
   display: flex;

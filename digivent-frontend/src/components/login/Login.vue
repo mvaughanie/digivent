@@ -47,7 +47,7 @@
       </div>
 
       <div>
-        <label for="username"> Speaker Name</label>
+        <label for="username">Speaker Name</label>
         <input
           v-model="speaker.userName"
           type="text"
