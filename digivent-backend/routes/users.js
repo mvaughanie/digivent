@@ -1,6 +1,7 @@
 const router = require("express").Router();
 const User = require("../models/User.js");
-const Event = require("../models/Event.js");
+const Question = require("../models/Question.js");
+const Speaker = require("../models/Speaker.js");
 
 router.param("id", (req, res, next, id) => {
   User.findById(id)
@@ -52,41 +53,32 @@ router.delete("/:id", (req, res, next) => {
   });
 });
 
+// Get events details by userId
 router.get("/:id/events", (req, res, next) => {
-  Event.find({ user: req.user.id })
-    .sort({ createdAt: "desc" })
+  User.findById(req.user.id)
+    .populate("events", "name date")
     .then((events) => {
-      return res.status(200).send(events);
+      return res.send(events);
     })
     .catch(next);
 });
 
-router.post("/:id/events", (req, res, next) => {
-  const event = new Event(req.body);
-  event.user = req.user.id;
-  event
-    .save()
-    .then((event) => {
-      if (!req.user.events) {
-        req.user.events = [];
-      }
-      req.user.event.push(event);
-      req.user
-        .save()
-        .then((user) => {
-          res.status(201).send({ event: event, user: user });
-        })
-        .catch(next);
+// Book event
+router.put("/:id/event", (req, res, next) => {
+  User.findByIdAndUpdate(req.user.id, { $addToSet: { events: req.body } })
+    .then((user) => {
+      console.log("Add eventId to the user array");
+      return res.status(201).send(user);
     })
     .catch(next);
 });
 
 router.post("/login", (req, res, next) => {
-  if (!req.body.email) {
-    return res.status(422).send("Email can't be blank");
+  if (!req.body.userName) {
+    return res.status(422).send("username can't be blank");
   }
 
-  User.findOne({ email: req.body.email })
+  User.findOne({ userName: req.body.userName })
     .then(function (user) {
       if (!user) {
         return res.status(422).send("User not found");
@@ -96,8 +88,30 @@ router.post("/login", (req, res, next) => {
     .catch(next);
 });
 
+// Post new question by userId
+router.post("/:id/question", (req, res, next) => {
+  const question = new Question(req.body);
+  question.user = req.user.id;
+  question
+    .save()
+    .then((question) => {
+      if (!req.user.questions) {
+        req.user.questions = [];
+      }
+      console.log(question);
+      req.user.questions.push(question);
+      req.user
+        .save()
+        .then((user) => {
+          res.status(201).send({ question: question, user: user });
+        })
+        .catch(next);
+    })
+    .catch(next);
+});
+
 router.post("/register", function (req, res, next) {
-  if (!req.body.username) {
+  if (!req.body.userName) {
     return res.status(422).send("Username can't be blank");
   }
   if (!req.body.password) {
@@ -107,7 +121,7 @@ router.post("/register", function (req, res, next) {
     return res.status(422).send("Email can't be blank");
   }
 
-  User.findOne({ email: req.body.email })
+  User.findOne({ userName: req.body.userName })
     .then((user) => {
       if (user) {
         return res.status(422).send("User already exists");
@@ -121,6 +135,9 @@ router.post("/register", function (req, res, next) {
         .catch(next);
     })
     .catch(next);
+});
+router.post("/", (req, res, next) => {
+  console.log(req.body);
 });
 
 module.exports = router;

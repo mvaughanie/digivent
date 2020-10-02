@@ -1,0 +1,157 @@
+<template>
+  <div>
+    <h1>Log In</h1>
+    <div class="login">
+      <div class="formButton">
+        <button @click="show = true">User</button>
+
+        <button @click="show = false">Speaker</button>
+      </div>
+    </div>
+
+    <form v-if="show" class="user" v-on:submit.prevent="checkUser">
+      <div v-if="errors.length">
+        <p>
+          <b>Please correct the following</b>
+        </p>
+        <ul v-for="(error, index) in errors" v-bind:key="index">
+          <li>{{ error }}</li>
+        </ul>
+      </div>
+
+      <div>
+        <label for="username">User Name</label>
+        <input v-model="user.userName" type="text" name="name" id="username" />
+      </div>
+      <div>
+        <label for="pasword">Password</label>
+        <input
+          v-model="user.password"
+          type="text"
+          name="password"
+          id="password"
+        />
+      </div>
+      <div>
+        <input type="submit" value="Log In" />
+      </div>
+    </form>
+    <form v-else v-on:submit.prevent="checkSpeaker">
+      <div v-if="errors.length">
+        <p>
+          <b>Please correct the following</b>
+        </p>
+        <ul v-for="(error, index) in errors" v-bind:key="index">
+          <li>{{ error }}</li>
+        </ul>
+      </div>
+
+      <div>
+        <label for="username"> Speaker Name</label>
+        <input
+          v-model="speaker.userName"
+          type="text"
+          name="name"
+          id="username"
+        />
+      </div>
+      <div>
+        <label for="pasword">Password</label>
+        <input
+          v-model="speaker.password"
+          type="text"
+          name="password"
+          id="password"
+        />
+      </div>
+      <div>
+        <input type="submit" value="Log In" />
+      </div>
+    </form>
+  </div>
+</template>
+
+<script>
+import EventBus from "../../eventBus.js";
+export default {
+  name: "login",
+
+  data: function() {
+    return {
+      show: true,
+      user: {
+        userName: "",
+        password: "",
+      },
+      speaker: {
+        userName: "",
+        password: "",
+      },
+      errors: [],
+    };
+  },
+  methods: {
+    checkUser: function(event) {
+      console.log("user");
+      event.preventDefault();
+      this.errors = [];
+      if (!this.user.userName) {
+        this.errors.push("Username required");
+      }
+      if (!this.errors.length) {
+        this.loginUser(this.user);
+      }
+    },
+    checkSpeaker: function(event) {
+      console.log("speaker");
+      event.preventDefault();
+      this.errors = [];
+      if (!this.speaker.userName) {
+        this.errors.push("Username required");
+      }
+      if (!this.errors.length) {
+        this.loginSpeaker(this.speaker);
+      }
+    },
+    loginUser(user) {
+      this.$http.post(`${process.env.VUE_APP_API_URL}users/login`, user).then(
+        function(response) {
+          if (response.body.userName) {
+            localStorage.loggedIn = "yes";
+            localStorage.userName = user.userName;
+            localStorage.userId = response.body._id;
+            EventBus.$emit("$loggedIn");
+            this.$router.push({ path: "/events" });
+          }
+        },
+        function(response) {
+          this.errors.push(response.body);
+        }
+      );
+    },
+
+    loginSpeaker(speaker) {
+      this.$http
+        .post(`${process.env.VUE_APP_API_URL}speakers/login`, speaker)
+        .then(
+          function(response) {
+            if (response.body.userName) {
+              localStorage.loggedIn = "yes";
+              localStorage.userName = speaker.userName;
+              localStorage.speakerId = response.body._id;
+              EventBus.$emit("$loggedIn");
+              this.$router.push({ path: "/" });
+            }
+          },
+          function(response) {
+            this.errors.push(response.body);
+          }
+        );
+    },
+  },
+};
+</script>
+
+<style lang="scss" scoped>
+@import "@/style/_variables.scss";
+</style>

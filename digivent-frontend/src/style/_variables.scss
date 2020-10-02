@@ -1,1 +1,70 @@
-$primary: navy;
+// Colors
+
+$primary: #05386b;
+$secondary: #5cdb95;
+$secondary-dark: #379683;
+$natural-dark: #5f5f5f;
+$natural-light: #edf5e1;
+
+// fonts
+@mixin heading-large {
+  width: 284px;
+  height: 79px;
+  left: 44px;
+  top: 210px;
+  font-family: "Roboto", sans-serif;
+  font-style: normal;
+  font-weight: 500;
+  font-size: 36px;
+  line-height: 85%;
+}
+
+@mixin small-heading {
+  background: $natural-dark;
+}
+
+/* Button/Primary */
+
+@mixin buttonprimary {
+  display: flex;
+  flex-direction: column;
+  padding: 22px 32px;
+  // position: absolute;
+  // height: 65px;
+  // left: 57px;
+  // right: 57px;
+  // bottom: 367px;
+  background: $secondary;
+  border-radius: 20px;
+  text-align: center;
+  font-weight: 400;
+  color: white;
+}
+
+@mixin secondarybutton {
+  position: absolute;
+  width: 144.39px;
+  height: 65px;
+  left: 58px;
+  top: 700px;
+
+  background: #edf5e1;
+  border-radius: 20px;
+}
+
+@mixin thumb-img {
+  margin-right: 10px;
+  height: 50px;
+  width: 50px;
+  border-radius: 20px;
+  overflow: hidden;
+  position: relative;
+  img {
+    position: absolute;
+    object-fit: cover;
+    width: 100%;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+  }
+}

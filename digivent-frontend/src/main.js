@@ -10,13 +10,52 @@ const routes = [
   {
     name: "event",
     path: "/events",
-    component: () => import("./components/event/EventPage.vue"),
+    component: () => import("./components/event/Event"),
     props: true,
   },
   {
     name: "edit",
     path: "/events/:eventId?/edit",
-    component: () => import("./components/edit-event/EditEvent.vue"),
+    component: () => import("./components/edit-event/EditEvent"),
+    props: true,
+  },
+  {
+    name: "details",
+    path: "/events/:eventId/details",
+    component: () => import("./components/event-details/EventDetails"),
+    props: true,
+    beforeEnter: (to, from, next) => {
+      if (!localStorage.getItem("userName")) return next("login");
+      next();
+    },
+  },
+  {
+    name: "book",
+    path: "/booking",
+    component: () => import("./components/book/BookEvent"),
+    props: true,
+  },
+  {
+    name: "profile",
+    path: "/profile",
+    component: () => import("./components/profile/Profile"),
+    props: true,
+  },
+  {
+    name: "login",
+    path: "/login",
+    component: () => import("./components/login/Login"),
+  },
+  {
+    name: "register-user",
+    path: "/register-user",
+    component: () => import("./components/register/RegisterUser"),
+    props: true,
+  },
+  {
+    name: "register-speaker",
+    path: "/register-speaker",
+    component: () => import("./components/register/RegisterSpeaker"),
     props: true,
   },
 ];

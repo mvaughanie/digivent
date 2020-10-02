@@ -1,26 +1,24 @@
 <template>
   <div>
     <form>
-      <label for="search">Search events</label>
-      <input v-model="search" type="text" id="search" />
+      <label for="search">Search Event</label>
+      <input @input="searchEvent" :search="search" type="text" id="search" />
     </form>
   </div>
 </template>
 
 <script>
+
 export default {
   name: "MySearchbar",
-  props: ["events"],
-  data: function() {
-    return {};
+  props: {
+      search: null,
   },
-  //   computed: {
-  //     filteredEvents() {
-  //       return this.events.filter((event) => {
-  //         return event.name.toLowerCase().includes(this.search.toLowerCase());
-  //       });
-  //     },
-  //   },
+  methods: {
+    searchEvent($event) {
+      this.$emit('input', $event.target.value)
+    },
+  },
 };
 </script>
 
