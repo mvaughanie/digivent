@@ -5,7 +5,7 @@
     <div v-if="isSpeaker === 'yes'">
       <h3>Hi Host, {{ speaker.firstName }} {{ speaker.lastName }}</h3>
       <h4>Check <a href="">your events</a></h4>
-      <div class="flexbox__thumb">
+      <div class="thumb">
         <img :src="speaker.image" :alt="speaker.firstName" />
       </div>
     </div>
@@ -60,10 +60,24 @@ export default {
   computed: {
     filteredEvents: function() {
       return this.events.filter((event) => {
-        let byName =
+        let byEvent =
           event.name.toLowerCase().indexOf(this.search.toLowerCase()) > -1;
-        if (byName === true) {
-          return byName;
+        if (byEvent === true) {
+          return byEvent;
+        }
+        let byFirstName =
+          event.speaker.firstName
+            .toLowerCase()
+            .indexOf(this.search.toLowerCase()) > -1;
+        if (byFirstName === true) {
+          return byFirstName;
+        }
+        let byLastName =
+          event.speaker.lastName
+            .toLowerCase()
+            .indexOf(this.search.toLowerCase()) > -1;
+        if (byLastName === true) {
+          return byLastName;
         }
       });
     },
@@ -78,9 +92,8 @@ export default {
   display: flex;
   align-items: center;
   overflow: hidden;
-
-  &__thumb {
-    @include thumb-img;
-  }
-}  
+}
+.thumb {
+  @include thumb-img;
+}
 </style>

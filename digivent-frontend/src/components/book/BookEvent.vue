@@ -16,7 +16,9 @@
       <h4>{{ event.time }}</h4>
     </div>
     <div>Qr code</div>
-    <input type="button" value="Ask question" />
+    <router-link :to="{ name: 'PostQuestion', params: { eventId: event._id } }"
+      >Ask question
+    </router-link>
   </div>
 </template>
 

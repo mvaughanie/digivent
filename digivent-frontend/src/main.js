@@ -9,19 +9,19 @@ Vue.use(VueRouter);
 const routes = [
   {
     name: "event",
-    path: "/events",
+    path: "/",
     component: () => import("./components/event/Event"),
     props: true,
   },
   {
     name: "edit",
-    path: "/events/:eventId?/edit",
+    path: "/:eventId?/edit",
     component: () => import("./components/edit-event/EditEvent"),
     props: true,
   },
   {
     name: "details",
-    path: "/events/:eventId/details",
+    path: "/:eventId/details",
     component: () => import("./components/event-details/EventDetails"),
     props: true,
     beforeEnter: (to, from, next) => {
@@ -40,6 +40,10 @@ const routes = [
     path: "/profile",
     component: () => import("./components/profile/Profile"),
     props: true,
+    beforeEnter: (to, from, next) => {
+      if (!localStorage.getItem("userName")) return next("login");
+      next();
+    },
   },
   {
     name: "login",
@@ -59,6 +63,23 @@ const routes = [
     props: true,
   },
   {
+    name: "PostQuestion",
+    path: "/post-question",
+    component: () => import("./components/post-question/PostQuestion"),
+    props: true,
+  },
+  {
+    name: "Question",
+    path: "/question",
+    component: () => import("./components/question/Question"),
+    props: true,
+  },
+  {
+    name: "MyQuestions",
+    path: "/my-questions",
+    component: () => import("./components/question/MyQuestions"),
+  },
+    {
     name:"speaker-detail",
     path:"/speaker-detail",
     component:() => import("./components/speaker-detail/SpeakerDetail.vue"),

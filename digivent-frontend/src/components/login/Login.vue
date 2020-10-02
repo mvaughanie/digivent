@@ -33,7 +33,7 @@
         />
       </div>
       <div>
-        <input type="submit" value="Log In" />
+        <input type="submit" value="Login" />
       </div>
     </form>
     <form v-else v-on:submit.prevent="checkSpeaker">
@@ -65,7 +65,7 @@
         />
       </div>
       <div>
-        <input type="submit" value="Log In" />
+        <input type="submit" value="Login" />
       </div>
     </form>
   </div>
@@ -121,7 +121,7 @@ export default {
             localStorage.userName = user.userName;
             localStorage.userId = response.body._id;
             EventBus.$emit("$loggedIn");
-            this.$router.push({ path: "/events" });
+            this.$router.push({ path: "/" });
           }
         },
         function(response) {

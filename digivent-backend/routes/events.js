@@ -1,6 +1,8 @@
 const router = require("express").Router();
 const Event = require("../models/Event");
 const Speaker = require("../models/Speaker.js");
+const Question = require("../models/Question.js");
+
 
 router.param("id", (req, res, next, id) => {
   Event.findById(id)
@@ -45,6 +47,18 @@ router.get("/:id/speaker", (req, res, next) => {
     .then((speaker) => {
       console.log("Get speaker data by eventId");
       return res.status(200).send(speaker);
+    })
+    .catch(next);
+});
+
+// Get questions by event Id
+router.get("/:id/questions", (req, res, next) => {
+  Question.find({ event: req.event.id })
+    .populate("user", "image userName")
+    .sort({ createdAt: "desc" })
+    .then((questions) => {
+      console.log("Get questions by eventId");
+      return res.status(200).send(questions);
     })
     .catch(next);
 });

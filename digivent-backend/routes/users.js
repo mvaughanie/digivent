@@ -63,6 +63,18 @@ router.get("/:id/events", (req, res, next) => {
     .catch(next);
 });
 
+// Get questions by user Id
+router.get("/:id/questions", (req, res, next) => {
+  Question.find({ user: req.params.id })
+    .populate("user", "image userName")
+    .sort({ createdAt: "desc" })
+    .then((questions) => {
+      console.log("Get questions by eventId");
+      return res.status(200).send(questions);
+    })
+    .catch(next);
+});
+
 // Book event
 router.put("/:id/event", (req, res, next) => {
   User.findByIdAndUpdate(req.user.id, { $addToSet: { events: req.body } })
@@ -98,7 +110,6 @@ router.post("/:id/question", (req, res, next) => {
       if (!req.user.questions) {
         req.user.questions = [];
       }
-      console.log(question);
       req.user.questions.push(question);
       req.user
         .save()

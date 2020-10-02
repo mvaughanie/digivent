@@ -26,21 +26,20 @@
     <div class="flexbox">
       <div>
         <h3>Host</h3>
-        <div class="flexbox__thumb">
+        <div class="thumb">
           <img :src="event.speaker.image" :alt="event.speaker.firstName" />
         </div>
         <h3>{{ event.speaker.firstName }} {{ event.speaker.lastName }}</h3>
       </div>
     </div>
-
     <div v-if="isSpeaker === 'yes'">
-      <router-link
-        :to="{ name: 'edit', params: { eventId: event._id } }"
-        @click="checkSpeaker"
-      >
+      <a href @click.prevent="checkSpeaker(event.speaker._id)">
         Edit event
-      </router-link>
-      <a href @click.prevent="deleteEvent(event._id)"> Delete Event </a>
+      </a>
+      <a href @click.prevent="deleteEvent(event._id, event.speaker._id)">
+        Delete Event
+      </a>
+
       <h4>Event description</h4>
       <p>{{ event.description }}</p>
     </div>
@@ -52,7 +51,9 @@
         >
           <h6>About host</h6>
         </router-link>
-        <input type="button" value="Ask question" />
+        <router-link :to="{ name: 'Question', params: { eventId: event._id } }"
+          >View Questions
+        </router-link>
       </div>
       <h4>Event description</h4>
       <p>{{ event.description }}</p>
@@ -92,18 +93,23 @@ export default {
   },
   created: function() {
     if (localStorage.speakerId) {
-      console.log(this.event.speaker);
-      this.event.speaker._id = localStorage.speakerId;
       this.isSpeaker = "yes";
     }
   },
   methods: {
-    deleteEvent: function(eventId) {
-      this.$http
-        .delete(`${process.env.VUE_APP_API_URL}events/${eventId}`)
-        .then(function() {
-          this.$router.push({ path: "/events" });
-        });
+    deleteEvent: function(eventId, speakerId) {
+      if (localStorage.speakerId !== speakerId) {
+        alert("You don't have permission to do.");
+      } else {
+        const choice = confirm("Want to delete?");
+        if (choice) {
+          this.$http
+            .delete(`${process.env.VUE_APP_API_URL}events/${eventId}`)
+            .then(function() {
+              this.$router.push({ path: "/events" });
+            });
+        }
+      }
     },
     bookEvent: function() {
       const event = this.event;
@@ -114,6 +120,16 @@ export default {
           alert("Booking confirmed!");
         });
     },
+
+    checkSpeaker: function(speakerId) {
+      if (localStorage.speakerId !== speakerId) {
+        alert("You don't have permission to do.");
+      } else {
+        this.$router.push({
+          name: "edit",
+          params: { eventId: this.event._id },
+        });
+      }
   },
 };
 </script>
@@ -125,17 +141,15 @@ export default {
   display: flex;
   align-items: center;
   overflow: hidden;
-
-  &__thumb {
-    @include thumb-img;
-  }
   &__main {
     width: 100%;
     min-width: 600px;
     height: auto;
   }
 }
-
+.thumb {
+  @include thumb-img;
+}
 .btn {
   @include buttonprimary;
 }
