@@ -55,9 +55,9 @@ router.delete("/:id", (req, res, next) => {
 // Get events details by userId
 router.get("/:id/events", (req, res, next) => {
   User.findById(req.user.id)
-    .populate("events", "name date")
-    .then((events) => {
-      return res.send(events);
+    .populate("events", "name date time speaker")
+    .then((user) => {
+      return res.send(user);
     })
     .catch(next);
 });

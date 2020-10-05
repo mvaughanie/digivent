@@ -84,7 +84,15 @@ const routes = [
     path: "/speaker-detail",
     component: () => import("./components/speaker-detail/SpeakerDetail.vue"),
     props: true,
-  },
+  }
+  
+  ,
+  {
+    name: "my-events",
+    path: "/my-events",
+    component: () => import("./components/my-event/MyEvent.vue"),
+    props: true,
+  }
 ];
 
 const router = new VueRouter({

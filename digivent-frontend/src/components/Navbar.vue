@@ -65,6 +65,13 @@ export default {
 }
 .text {
   color: white;
+  font-family: "Roboto", sans-serif;
+  font-style: normal;
+  font-weight: 500;
+  font-size: 20px;
+}
+.router-link-exact-active {
+    color: rgb(85, 85, 85)!important;
 }
 
 .logo {
