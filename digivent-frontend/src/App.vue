@@ -43,5 +43,25 @@ h2 {
       margin-top: 100px;
     }
   }
+  &-round {
+    width: 100%;
+    position: absolute;
+    top: 200px;
+    border-radius: 20px;
+    background: white;
+    padding: 28px;
+  }
+  // &-inner {
+  //   width: 100%;
+  //   padding: 0 16px;
+  //   @include desktop {
+  //     margin: 0;
+  //   }
+  // }
+  // &--flex {
+  //   flex-direction: column;
+  //   display: flex;
+  //   align-content: flex-end;
+  // }
 }
 </style>
