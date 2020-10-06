@@ -77,7 +77,11 @@ const routes = [
   {
     name: "my-questions",
     path: "/my-questions",
-    component: () => import("./components/question/MyQuestions"),
+    component: () => import("./components/my-question/MyQuestions"),
+    beforeEnter: (to, from, next) => {
+      if (!localStorage.getItem("userName")) return next("login");
+      next();
+    },
   },
   {
     name: "speaker-detail",
