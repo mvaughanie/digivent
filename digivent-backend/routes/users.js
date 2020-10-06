@@ -66,6 +66,7 @@ router.get("/:id/events", (req, res, next) => {
 router.get("/:id/questions", (req, res, next) => {
   Question.find({ user: req.params.id })
     .populate("user", "image userName")
+    .populate("event", "name")
     .sort({ createdAt: "desc" })
     .then((questions) => {
       console.log("Get questions by eventId");
