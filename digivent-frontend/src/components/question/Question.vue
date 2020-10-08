@@ -9,13 +9,15 @@
       <h3>{{ event.speaker.firstName }} {{ event.speaker.lastName }}</h3>
       <h3>{{ event.name }}</h3>
       <div v-for="(question, i) in questions" :key="i">
-        <div class="thumb">
-          <img :src="question.user.image" :alt="question.user.userName" />
-        </div>
-        <div>
-          <h3>{{ question.user.userName }}</h3>
-          <p>{{ question.body }}</p>
-        </div>
+        <router-link :to="{ name: 'user-reply-question', params: { questionId : question._id}}">
+          <div class="thumb">
+            <img :src="question.user.image" :alt="question.user.userName" />
+          </div>
+          <div>
+            <h3>{{ question.user.userName }}</h3>
+            <p>{{ question.body }}</p>
+          </div>
+        </router-link>
       </div>
       <router-link
         :to="{ name: 'post-question', params: { eventId: event._id } }"
