@@ -59,7 +59,7 @@ export default {
   data: function () {
     return {
       loggedIn: "no",
-      userName: "",
+      userName: ""
     };
   },
   methods: {
