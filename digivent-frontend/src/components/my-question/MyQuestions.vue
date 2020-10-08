@@ -3,7 +3,6 @@
     <div v-if="isEmpty == 'no'">
       <h1>Questions</h1>
       <div class="flexbox" v-for="(question, i) in questions" :key="i">
-
         <router-link :to="{ name: 'user-reply-question', params: { questionId : question._id, eventId: question.event._id}}">
           <div class="thumb">
             <img :src="question.user.image" :alt="question.user.userName" />
@@ -22,7 +21,6 @@
             <div class="dot-unread" v-else></div>
           </div>
         </router-link>
-
       </div>
       <!-- <router-link
         :to="{ name: 'post-question', params: { eventId: event._id } }"
@@ -39,14 +37,14 @@
 <script>
 export default {
   name: "my-questions",
-  data: function () {
+  data: function() {
     return {
       seen: {},
       isEmpty: "no",
       questions: [],
     };
   },
-  mounted: function () {
+  mounted: function() {
     if (localStorage.speakerId) {
       const speakerId = localStorage.speakerId;
       this.getQuestions(speakerId, "speakers");
@@ -57,17 +55,17 @@ export default {
     }
   },
   methods: {
-    isSeen: function (event, i) {
+    isSeen: function(event, i) {
       if (this.seen[i]) {
         this.seen[i] = false;
       } else if (!this.seen[i]) {
         this.$set(this.seen, i, true);
       }
     },
-    getQuestions: function (id, person) {
+    getQuestions: function(id, person) {
       this.$http
         .get(`${process.env.VUE_APP_API_URL}${person}/${id}/questions`)
-        .then(function (data) {
+        .then(function(data) {
           this.questions = data.body;
         });
       if (this.questions.length > 0) {
