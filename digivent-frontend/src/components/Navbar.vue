@@ -7,9 +7,7 @@
       <router-link class="link" :to="'/my-questions'">Questions</router-link>
       <router-link class="link" :to="'/my-events'">My Events</router-link>
       <router-link class="link" :to="'/profile'">Profile</router-link>
-      <a class="link" v-if="loggedIn === 'yes'" @click.prevent="setLoggedOut"
-        >Log Out</a
-      >
+      <a class="link" v-if="loggedIn === 'yes'" @click.prevent="setLoggedOut">Log Out</a>
       <router-link class="link" v-else v-bind:to="'/login'">Login</router-link>
     </div>
 
@@ -78,13 +76,13 @@ export default {
       console.log("login");
       this.loggedIn = localStorage.loggedIn;
       this.userName = localStorage.userName;
-    },
+    }
   },
   mounted() {
     this.loggedIn = localStorage.getItem("loggedIn");
     this.userName = localStorage.getItem("userName");
     EventBus.$on("$loggedIn", this.setLoggedIn);
-  },
+  }
 };
 </script>
 
@@ -140,6 +138,5 @@ export default {
     }
   }
 }
-
 </style>
 
