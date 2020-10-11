@@ -103,7 +103,10 @@ export default {
 
 .thumb {
   &-events {
-    margin-top: 20%;
+    position: absolute;
+    bottom: 10%;
+    left: 0;
+    // margin-top: 20%;
     @include desktop {
       @include position-bottom;
     }
@@ -138,6 +141,7 @@ export default {
 }
 .media {
   position: relative;
+  height: 90%;
   @include desktop {
     position: static;
   }
